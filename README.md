@@ -18,15 +18,9 @@ To build the solution, simply run the build script included in the root folder o
 
 Run
 ------------------------
+    
     cd build
     dotnet CheckoutBasket.dll
-    
-Regression
-------------------------
-
-A basic regression tests suite is included in the solution. Once your CheckoutBasket Web API is up and running, you can execute regression tests by using the following command.
-
-    dotnet test --configuration Release --no-build --no-restore "CheckoutBasket.Client.RegressionTests"
     
 Client
 =========
@@ -84,3 +78,10 @@ Clear an order
     {
         // error handling
     }    
+    
+Functional tests
+=========
+
+A basic regression tests suite is included in the solution. Once your CheckoutBasket Web API is up and running, you can execute regression tests by using the following command.
+
+    dotnet test --configuration Release --no-build --no-restore "CheckoutBasket.Client.RegressionTests"    
