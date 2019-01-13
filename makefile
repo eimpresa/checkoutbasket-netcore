@@ -18,5 +18,8 @@ dist: clean
 test:
 	dotnet test --configuration Release --no-build --no-restore ./src/CheckoutBasket.UnitTests/CheckoutBasket.UnitTests.csproj
 
+regression:
+	dotnet test --configuration Release --no-build --no-restore ./src/CheckoutBasket.Client.RegressionTests/CheckoutBasket.Client.RegressionTests.csproj
+
 run:
 	dotnet ./build/CheckoutBasket.dll
