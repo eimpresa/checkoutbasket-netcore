@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CheckoutBasket.Configuration;
 using CheckoutBasket.Repositories;
 using CheckoutBasket.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,10 +21,10 @@ namespace CheckoutBasket
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = ApplicationSettings.Build(configuration);
         }
 
-        public IConfiguration Configuration { get; }
+        public IApplicationSettings configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -38,9 +39,9 @@ namespace CheckoutBasket
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["TokenIssuer"],
-                        ValidAudience = Configuration["TokenAudience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SigningKey"]))
+                        ValidIssuer = configuration.TokenIssuer,
+                        ValidAudience = configuration.TokenAudience,
+                        IssuerSigningKey = new SymmetricSecurityKey(configuration.TokenSigningKey)
                     };
                 });
             services.AddMvc();
