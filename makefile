@@ -1,3 +1,6 @@
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
+
 default: dist
 
 clean:
@@ -8,9 +11,9 @@ clean:
 dist: clean
 	mkdir build
 	mkdir dist
-	dotnet restore CheckoutBasket.sln
-	dotnet build --configuration Release --no-restore
-	dotnet publish --configuration Release --no-build --no-restore --output build/ CheckoutBasket/CheckoutBasket.csproj
+	dotnet restore $(mkfile_dir)/src/CheckoutBasket.sln
+	dotnet build --configuration Release --no-restore $(mkfile_dir)/src/CheckoutBasket.sln
+	dotnet publish --configuration Release --no-build --no-restore --output $(mkfile_dir)/build $(mkfile_dir)/src/CheckoutBasket/CheckoutBasket.csproj
 
 test:
-	dotnet test --configuration Release --no-build --no-restore CheckoutBasket.UnitTests/CheckoutBasket.UnitTests.csproj
+	dotnet test --configuration Release --no-build --no-restore $(mkfile_dir)/src/CheckoutBasket.UnitTests/CheckoutBasket.UnitTests.csproj
