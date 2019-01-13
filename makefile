@@ -14,6 +14,7 @@ dist: clean
 	dotnet restore ./src/CheckoutBasket.sln
 	dotnet build --configuration Release --no-restore ./src/CheckoutBasket.sln
 	dotnet publish --configuration Release --no-build --no-restore --output $(mkfile_dir)/build ./src/CheckoutBasket/CheckoutBasket.csproj
+	cp checkoutbasket ./build/
 
 test:
 	dotnet test --configuration Release --no-build --no-restore ./src/CheckoutBasket.UnitTests/CheckoutBasket.UnitTests.csproj
@@ -22,4 +23,4 @@ regression:
 	dotnet test --configuration Release --no-build --no-restore ./src/CheckoutBasket.Client.RegressionTests/CheckoutBasket.Client.RegressionTests.csproj
 
 run:
-	dotnet ./build/CheckoutBasket.dll
+	./build/checkoutbasket
