@@ -23,14 +23,14 @@ namespace CheckoutBasket.Client.RegressionTests
             await GetTokenAsync(configuration.UserApiKey, configuration.UserApiSecret);
         }
 
-        // [Fact]
-        // public async void ShouldNotGetTokenWithInvalidCredentials()
-        // {
-        //     var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await GetTokenAsync(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
-        // }        
+        [Fact]
+        public async void ShouldNotGetTokenWithInvalidCredentials()
+        {
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await GetTokenAsync(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
+        }        
 
         private async Task<string> GetTokenAsync(string username, string password){
-            var postData = new Dictionary<string, string>() { { "username", configuration.UserApiKey }, { "password", configuration.UserApiSecret } };
+            var postData = new Dictionary<string, string>() { { "username", username }, { "password", password } };
             string token;
             using (var httpClient = new HttpClient())
             {
